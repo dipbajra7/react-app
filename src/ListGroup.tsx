@@ -51,35 +51,3 @@ export function ConditionalDynamicListGroup() {
     </>
   );
 }
-
-export function EventHandling() {
-  let cities = ["New York", "Los Angeles", "Charlotte"];
-  if (cities.length === 0) {
-    return (
-      <>
-        <h1>list is empty</h1>
-      </>
-    );
-  }
-  return (
-    <>
-      <h1> test</h1>
-      <ul className="list-group">
-        {cities.map(
-          (
-            city,
-            index /*when using map, we can optionally include index as well */
-          ) => (
-            <li
-              key={city}
-              className="list-group-item"
-              onClick={() => console.log("clicked", city, " at index ", index)}
-            >
-              {city}
-            </li>
-          )
-        )}
-      </ul>
-    </>
-  );
-}
