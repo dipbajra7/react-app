@@ -1,0 +1,36 @@
+//unused code
+
+import { configureStore } from "@reduxjs/toolkit"
+const BUY_CAKE = 'BUY_CAKE'
+
+//action
+function buyCake () {
+    return {
+        type: BUY_CAKE, // type is necessary
+        info: 'Redux Action', // can be any other property with any value even an object
+        quantity: 1
+    
+    }
+}
+
+
+const initialState = {
+    numOfCakes: 10
+}
+
+//(prevState, action) => newState this is the reducer
+const reducer = (state=initialState, action) => {
+    switch(action.type) {
+        case BUY_CAKE:
+            return {
+                ...state, //creates a copy of the state object before making the change to be safe. it tells the redux to make a copy of the current state and then change the number of cakes in the following line
+                numOfCakes: state.numOfCakes - action.quantity
+            }
+
+            default:
+                return state
+    }
+}
+
+//store
+const store = configureStore({reducer})

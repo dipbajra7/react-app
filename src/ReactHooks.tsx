@@ -1,4 +1,7 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/ReduxStore";
 
 //useState hook ------------------------------------------------
 
@@ -21,8 +24,7 @@ export function TextUpdater() {
     const [text, setText] = useState("Test");
 
     const changeText = (event: React.ChangeEvent<HTMLInputElement>) => setText(event.target.value)
-    const test = () => null
-
+    
     //setText(event.target.value)
     return (
         <>
@@ -62,3 +64,52 @@ export function UseReducerHook() {
         </>
     )
 } 
+
+export function DisplayBackendData() {
+    const [backendData, setBackendData] = useState("");
+    axios.get('http://localhost:8081/api/home')
+        .then(response => setBackendData(JSON.stringify(response.data)))
+        .catch(error => console.log(error))
+       
+    return (
+        <>
+       
+        <h1>{backendData}</h1>
+        
+        
+
+        </>
+    )
+}
+
+
+
+export function Test() {
+    const [num, setNum] = useState(0)
+
+    useEffect(() => {
+        console.log('The count is ', num)
+    }, [num])
+
+    const increment = () => (
+        setNum(num + 1)
+    )
+
+    const decrement = () => (
+        setNum(num - 1)
+    )
+
+
+    const currentCount = useSelector((state:RootState) => (state?.counter.value))
+   
+    return (
+        <>
+        <h1>{num}</h1>
+        <button key='increment' type="button" className="btn btn-secondary" onClick={increment}>Increment</button>
+        <button key='decrement' type="button" className="btn btn-secondary" onClick={decrement}>Decrement</button>
+
+        <h2>this is counter with redux inside another component</h2>
+        <h3>{currentCount}</h3>
+        </>
+    )
+}
