@@ -1,12 +1,14 @@
-import { UseProps, UseProps2, UseProps3 } from "./StateManagement";
-import { EventHandlingWithEventDisplayUsingFunction } from "./EventHandling"
-import { Alert } from "./Alert"
-import { Button } from "./Button"
-import { Counter, TextUpdater, UseReducerHook, DisplayBackendData, Test } from "./ReactHooks"
-import { CounterWithRedux } from "./redux/CounterWithRedux";
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { Alert } from './Alert';
+import { EventHandlingWithEventDisplayUsingFunction } from './EventHandling';
+import { UseProps, UseProps2, UseProps3 } from './StateManagement';
+import { Counter, TextUpdater, UseReducerHook } from './ReactHooks';
+import CounterWithRedux from './redux/CounterWithRedux';
 
 
-export default function App() {
+function App() {
+
   let months = ['Jan', 'Feb']
   let items = ['backpack', 'knife', 'lighter']
   let cities = ['LA', 'SFO', 'CLT']
@@ -25,7 +27,7 @@ export default function App() {
         <UseProps months={cities} heading={"Cities"} />
         <UseProps2 months={items} heading={"Camping Gear"} />
         <UseProps3 months={months} heading={"Months"} onSelectItem={onSelectItem} />
-        <Button onClickButton={onClickButton}>My Button</Button>
+        <Button onClick={onClickButton}>My Button</Button>
       </div>
       <div>
         <Counter />
@@ -36,10 +38,16 @@ export default function App() {
       <div>
         <UseReducerHook />
       </div>
-
-      {/* <div><DisplayBackendData/></div> */}
-      <div><Test /></div>
-      <div><CounterWithRedux /></div>
+      <Stack spacing={2} direction="row">
+        <Button variant="text">Text</Button>
+        <Button variant="contained">Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+      </Stack>
+      <div>
+        <CounterWithRedux />
+      </div>
     </>
   );
 }
+
+export default App;
